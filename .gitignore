@@ -40,3 +40,11 @@ captures/
 # OS files
 .DS_Store
 Thumbs.db
+
+# LaTeX build artifacts (keep main.pdf, ignore intermediates)
+report/*.aux
+report/*.log
+report/*.out
+report/*.toc
+report/*.synctex.gz
+report/pgs/

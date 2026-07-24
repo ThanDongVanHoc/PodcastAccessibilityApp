@@ -1,0 +1,115 @@
+\documentclass[11pt,a4paper]{article}
+
+% ------------------------------------------------------------------
+%  Building Accessible Android Applications — Case Study: Podcast App
+%  Group report (English). Compile with pdflatex (run twice for ToC).
+% ------------------------------------------------------------------
+
+% Compile with XeLaTeX (Unicode/Vietnamese names handled natively via fontspec).
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setmonofont{Consolas}[Scale=0.88]
+\usepackage[a4paper,margin=2.4cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,backgrounds,calc}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+
+% ---- Palette (mirrors the app theme) -----------------------------
+\definecolor{brandblue}{HTML}{3B5BDB}
+\definecolor{brandgreen}{HTML}{12B886}
+\definecolor{ink}{HTML}{1A1C1E}
+\definecolor{slate}{HTML}{44474E}
+\definecolor{softbg}{HTML}{F2F4F9}
+\definecolor{codebg}{HTML}{F7F8FB}
+\definecolor{codekw}{HTML}{2B6CB0}
+\definecolor{codestr}{HTML}{2F9E44}
+\definecolor{codecom}{HTML}{868E96}
+\definecolor{codeann}{HTML}{9C36B5}
+\definecolor{warnred}{HTML}{B02A37}
+
+% ---- Section styling ---------------------------------------------
+\titleformat{\section}{\Large\bfseries\color{brandblue}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{ink}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{slate}}{\thesubsubsection}{0.6em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\itshape Building Accessible Android Applications}
+\fancyhead[R]{\small Podcast Case Study}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\captionsetup{font=small,labelfont={bf,color=brandblue}}
+
+% ---- Kotlin listing style ----------------------------------------
+\lstdefinelanguage{Kotlin}{
+  keywords={package,import,fun,val,var,class,object,interface,if,else,when,for,while,return,true,false,null,private,public,override,companion,by,this,is,as,in,data,sealed,enum,lateinit,remember,Composable},
+  keywordstyle=\color{codekw}\bfseries,
+  ndkeywords={Modifier,Text,Icon,IconButton,Box,Row,Column,Card,Scaffold,Role,Color,String,Boolean,Float,Unit,List,Int},
+  ndkeywordstyle=\color{brandgreen}\bfseries,
+  sensitive=true,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{codecom}\itshape,
+  stringstyle=\color{codestr},
+  morestring=[b]",
+  morestring=[b]',
+}
+\lstdefinestyle{kt}{
+  language=Kotlin,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  breakatwhitespace=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  frame=leftline,
+  framerule=2pt,
+  rulecolor=\color{brandblue},
+  xleftmargin=10pt,
+  aboveskip=8pt,
+  belowskip=8pt,
+  moredelim=[il][\color{codeann}]{@},
+}
+\lstset{style=kt}
+
+% ---- Helper commands ---------------------------------------------
+\newcommand{\code}[1]{\colorbox{softbg}{\texttt{\small #1}}}
+\newcommand{\member}[1]{{\small\itshape Lead: #1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\input{sections/00_title}
+\clearpage
+\tableofcontents
+\clearpage
+
+\input{sections/01_introduction}
+\input{sections/02_background}
+\input{sections/03_casestudy}
+\input{sections/04_core_semantics}
+\input{sections/05_advanced_semantics}
+\input{sections/06_testing_evaluation}
+\input{sections/07_conclusion}
+\input{sections/08_appendix}
+
+\clearpage
+\input{sections/09_references}
+
+\end{document}

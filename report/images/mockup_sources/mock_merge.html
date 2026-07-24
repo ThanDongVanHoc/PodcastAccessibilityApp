@@ -1,0 +1,59 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,system-ui,sans-serif;}
+body{background:#fff;padding:30px;display:flex;gap:40px;align-items:flex-start;}
+.col{width:430px;}
+.h{font-size:19px;font-weight:700;color:#1A1C1E;margin-bottom:4px;}
+.sub{font-size:14px;color:#5b5f6b;margin-bottom:16px;line-height:20px;}
+.card{background:#fff;border:1px solid #e2e5ee;border-radius:16px;padding:14px;
+  display:flex;align-items:center;gap:12px;box-shadow:0 1px 4px rgba(0,0,0,.08);position:relative;}
+.cover{width:56px;height:56px;border-radius:12px;background:#12B886;display:flex;
+  align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:24px;}
+.meta{flex:1;}
+.t1{font-size:17px;font-weight:600;color:#1A1C1E;}
+.t2{font-size:14px;color:#44474E;margin-top:2px;}
+.t3{font-size:12.5px;color:#44474E;margin-top:2px;}
+.trail{display:flex;gap:6px;color:#44474E;font-size:20px;}
+.glyph{font-family:'Segoe UI Symbol',sans-serif;}
+/* TalkBack-style green focus box */
+.focus{outline:3px solid #00A152;outline-offset:2px;border-radius:6px;}
+.focusbox{position:absolute;border:3px solid #00A152;border-radius:8px;pointer-events:none;}
+.speak{margin-top:14px;font-size:13px;color:#1A7F37;background:#e8f7ee;border-radius:10px;
+  padding:10px 12px;line-height:19px;}
+.speak b{color:#0b5d2a;}
+.count{margin-top:8px;font-size:13px;font-weight:600;color:#b02a37;}
+.count.g{color:#1A7F37;}
+</style></head>
+<body>
+  <div class="col">
+    <div class="h">Before &mdash; no merging</div>
+    <div class="sub">Every text and icon is its own focus stop. TalkBack needs 6 swipes to cross one card.</div>
+    <div class="card">
+      <div class="cover focus">B</div>
+      <div class="meta">
+        <div class="t1 focus" style="display:inline-block">Built Different</div><br>
+        <div class="t2 focus" style="display:inline-block;margin-top:4px">Trung Kien Le</div><br>
+        <div class="t3 focus" style="display:inline-block;margin-top:4px">Technology &bull; 3 episodes</div>
+      </div>
+      <div class="trail"><span class="glyph focus">&#9733;</span><span class="glyph focus">&#8942;</span></div>
+    </div>
+    <div class="count">6 focus stops &nbsp;&bull;&nbsp; 6 swipes per card</div>
+    <div class="speak">TalkBack says: &ldquo;Built Different&rdquo; <i>(swipe)</i> &ldquo;Trung Kien Le&rdquo; <i>(swipe)</i> &ldquo;Technology, 3 episodes&rdquo; <i>(swipe)</i> &ldquo;Star, button&rdquo; &hellip;</div>
+  </div>
+
+  <div class="col">
+    <div class="h">After &mdash; mergeDescendants = true</div>
+    <div class="sub">The card is one focus stop; nested actions move to the TalkBack actions menu.</div>
+    <div class="card focus">
+      <div class="cover">B</div>
+      <div class="meta">
+        <div class="t1">Built Different</div>
+        <div class="t2">Trung Kien Le</div>
+        <div class="t3">Technology &bull; 3 episodes</div>
+      </div>
+      <div class="trail"><span class="glyph" style="color:#3B5BDB">&#9733;</span><span class="glyph">&#8942;</span></div>
+    </div>
+    <div class="count g">1 focus stop &nbsp;&bull;&nbsp; 1 swipe per card</div>
+    <div class="speak">TalkBack says: <b>&ldquo;Built Different, Trung Kien Le, Technology, 3 episodes.&rdquo;</b><br>&ldquo;Actions available&rdquo; &rarr; Bookmark, More options.</div>
+  </div>
+</body></html>

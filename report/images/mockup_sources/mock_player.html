@@ -1,0 +1,45 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="style.css">
+<style>
+.pcontent{ flex:1; display:flex; flex-direction:column; align-items:center; padding:16px 28px; }
+.big-cover{ width:230px; height:230px; border-radius:24px; background:#12B886;
+  display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:96px;
+  box-shadow:0 12px 30px rgba(18,184,134,.35); margin-top:14px; }
+.eptitle2{ font-size:24px; font-weight:700; color:var(--on); text-align:center; margin-top:26px; }
+.author2{ font-size:16px; color:var(--var); margin-top:4px; }
+.live{ font-size:13px; font-weight:600; color:#3B5BDB; margin-top:10px;
+  background:#eaeeff; padding:4px 12px; border-radius:12px; }
+.track{ width:100%; height:6px; border-radius:3px; background:#dfe2ec; margin-top:26px; position:relative; }
+.fill{ position:absolute; left:0; top:0; height:6px; border-radius:3px; background:#3B5BDB; width:35%; }
+.knob{ position:absolute; left:35%; top:-5px; width:16px; height:16px; border-radius:50%; background:#3B5BDB; transform:translateX(-50%); }
+.times{ width:100%; display:flex; justify-content:space-between; font-size:12px; color:var(--var); margin-top:8px; }
+.transport{ display:flex; align-items:center; gap:32px; margin-top:34px; }
+.tbtn{ width:56px; height:56px; display:flex; align-items:center; justify-content:center;
+  font-size:30px; color:var(--on); }
+.pbtn{ width:72px; height:72px; border-radius:50%; background:#3B5BDB; color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:34px; }
+.speed{ margin-top:34px; border:1.5px solid #c4c8d4; border-radius:20px; padding:8px 18px;
+  font-size:14px; font-weight:600; color:var(--on); display:flex; align-items:center; gap:8px; }
+</style></head>
+<body>
+<div class="phone">
+  <div class="sb"><span>9:41</span><span class="r glyph">&#9679;&#9679;&#9679; &#128246; &#128267;</span></div>
+  <div class="ab">
+    <div class="grp"><div class="ib glyph" style="font-size:24px">&#8592;</div>
+      <span class="title" style="font-size:20px;margin-left:6px">Now Playing</span></div>
+  </div>
+  <div class="pcontent">
+    <div class="big-cover">B</div>
+    <div class="eptitle2">Designing for TalkBack</div>
+    <div class="author2">Trung Kien Le</div>
+    <div class="live glyph">&#9654; Now playing</div>
+    <div class="track"><div class="fill"></div><div class="knob"></div></div>
+    <div class="times"><span>18:20</span><span>52 min remaining</span></div>
+    <div class="transport">
+      <div class="tbtn glyph">&#8630;</div>
+      <div class="pbtn glyph">&#10074;&#10074;</div>
+      <div class="tbtn glyph">&#8631;</div>
+    </div>
+    <div class="speed glyph">&#9193; 1.0x</div>
+  </div>
+</div>
+</body></html>

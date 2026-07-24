@@ -1,0 +1,60 @@
+\section{Introduction}
+\member{Phát}
+
+\subsection{Motivation}
+
+Roughly one in six people worldwide lives with a significant disability. For many of them a
+smartphone is not a convenience but the primary way they read, communicate, navigate, and work.
+\emph{Accessibility} is the practice of designing hardware and software so that people with
+temporary or permanent physical, sensory, or cognitive differences have an equal opportunity to use
+them. When an app ignores accessibility, it does not merely inconvenience these users --- it
+excludes them from a part of modern life. Building inclusively is therefore both an act of basic
+fairness and, increasingly, a legal obligation.
+
+This report documents how our group re-engineered a common consumer application --- a
+\textbf{podcast and audiobook player} --- to be usable by people who rely on assistive technology
+such as the TalkBack screen reader, Switch Access, and large display fonts. We deliberately chose an
+audio-first product: listening to spoken content is one of the few digital experiences that a blind
+user can enjoy on completely equal terms with a sighted user, provided the surrounding interface is
+accessible.
+
+\subsection{Project goal and scope}
+
+Our goal was to take a typical, ``accessibility-blind'' podcast UI and \emph{improve} it into an
+accessible one, then explain and justify every technique we applied. The deliverable is a
+front-end-only Jetpack Compose application (all data is mocked behind a repository interface, with
+no real backend) plus this report, which is organised around four contributions:
+
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{Background} --- the legal and technical foundations of Android accessibility.
+  \item \textbf{Core semantics} --- labelling, roles, state, touch targets, and font scaling.
+  \item \textbf{Advanced semantics} --- merging, traversal order, and custom screen-reader actions.
+  \item \textbf{Testing \& evaluation} --- how we verify the result and honestly assess trade-offs.
+\end{itemize}
+
+\subsection{What ``done'' looks like}
+
+Throughout the project we held ourselves to a simple bar: \emph{a person who never looks at the
+screen should be able to open the app, browse shows, pick an episode, and control playback using
+TalkBack alone}. Figure~\ref{fig:appflow} shows the three-screen user flow that a sighted user sees;
+the rest of the report explains what a screen-reader user hears and does at each step.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{0.31\textwidth}
+  \includegraphics[width=\linewidth]{images/home.png}
+  \caption{Discover}
+\end{subfigure}\hfill
+\begin{subfigure}{0.31\textwidth}
+  \includegraphics[width=\linewidth]{images/detail.png}
+  \caption{Podcast detail}
+\end{subfigure}\hfill
+\begin{subfigure}{0.31\textwidth}
+  \includegraphics[width=\linewidth]{images/player.png}
+  \caption{Now Playing}
+\end{subfigure}
+\caption{The three screens of the case-study app. The user flow is
+\textbf{Discover $\rightarrow$ Podcast detail $\rightarrow$ Now Playing}, with a
+``Continue listening'' shortcut on the home screen.}
+\label{fig:appflow}
+\end{figure}

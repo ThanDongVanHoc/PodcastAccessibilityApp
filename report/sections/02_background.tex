@@ -1,0 +1,111 @@
+\section{Background}
+\member{Phát}
+
+\subsection{Accessibility as a legal requirement}
+
+Accessibility has moved from ``nice to have'' to a statutory duty in many markets. The
+\textbf{European Accessibility Act (EAA)} argues that a common accessibility standard benefits
+everyone: disabled users gain fair, unified accommodation and real competition between providers,
+while companies gain a larger customer base and a single ruleset to build against. All EU member
+states incorporated the EAA into national law from June~2022, leaving the exact mechanism (directive,
+act, or regulation) to each country; the shared principle is that products offered in the EU must
+satisfy accessibility requirements.
+
+The technical yardstick behind most of this legislation is the \textbf{Web Content Accessibility
+Guidelines (WCAG~2.2)}. Although WCAG is written for the web, its success criteria are applied to
+native software through \emph{WCAG2ICT} and platform-specific mobile guidance. Because a podcast app
+is not a web page, we treat WCAG as \emph{technology-neutral guidance} and map each criterion onto its
+Android equivalent rather than claiming literal ``compliance''.
+
+\subsection{The POUR principles}
+
+WCAG organises accessibility around four principles, remembered by the acronym \textbf{POUR}
+(Figure~\ref{fig:pour}). They are the lens through which we evaluated every screen of our app.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+  box/.style={rounded corners=6pt,draw=brandblue,line width=1pt,fill=softbg,
+    text width=3.5cm,minimum height=2.2cm,align=center,inner sep=6pt},
+]
+  \def\cap#1{{\large\bfseries\color{brandblue}#1}}
+  \node[box] (p) at (0,0) {\cap{P}erceivable\\[2pt]\small Information must be presentable in ways users can sense --- text alternatives, captions, sufficient contrast.};
+  \node[box] (o) at (4.2,0) {\cap{O}perable\\[2pt]\small Every action must be reachable without a mouse --- keyboard, switch, and screen-reader navigation.};
+  \node[box] (u) at (8.4,0) {\cap{U}nderstandable\\[2pt]\small Content and controls must be predictable, clearly labelled, and give helpful error feedback.};
+  \node[box] (r) at (12.6,0) {\cap{R}obust\\[2pt]\small The UI must expose reliable semantics so current and future assistive tech can interpret it.};
+\end{tikzpicture}
+\caption{The four POUR principles that underpin WCAG and this project.}
+\label{fig:pour}
+\end{figure}
+
+For a media player these translate concretely: \textbf{Perceivable} means labelling every transport
+icon and keeping duration text high-contrast; \textbf{Operable} means play, seek, and bookmark must
+all work from TalkBack; \textbf{Understandable} means the play button announces whether it is playing
+or paused; \textbf{Robust} means we expose a correct \emph{semantics tree} rather than relying on
+pixels.
+
+\subsection{How Android exposes the UI to assistive technology}
+
+The single most important idea for an Android developer is that the screen a sighted user sees and
+the structure a screen reader traverses are \emph{two different trees}
+(Figure~\ref{fig:trees}).
+
+\begin{itemize}[leftmargin=1.4em]
+  \item The \textbf{Composition / layout tree} is the visual render hierarchy. Its nodes are boxes,
+        text, and images, ordered by where they are drawn on screen.
+  \item The \textbf{Semantics tree} runs in parallel and describes \emph{meaning}: each node carries a
+        name/label, a role, a state, and the actions it supports. This is the only thing assistive
+        services can read.
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+  n/.style={rounded corners=4pt,draw,line width=0.8pt,font=\small,inner sep=5pt,align=center},
+  vis/.style={n,draw=slate,fill=softbg},
+  sem/.style={n,draw=brandgreen,fill=brandgreen!8},
+  e/.style={-{Stealth[length=2mm]},draw=slate},
+  se/.style={-{Stealth[length=2mm]},draw=brandgreen}
+]
+  % Visual tree
+  \node[vis] (root) at (0,0) {Card (Box)};
+  \node[vis] (img)  at (-2.4,-1.5) {Image};
+  \node[vis] (col)  at (0,-1.5) {Column};
+  \node[vis] (btn)  at (2.4,-1.5) {IconButton};
+  \node[vis] (t1)   at (-1.9,-3.1) {Text\\``Built Different''};
+  \node[vis] (t2)   at (1.9,-3.1) {Text\\``Trung Kien Le''};
+  \draw[e] (root)--(img); \draw[e] (root)--(col); \draw[e] (root)--(btn);
+  \draw[e] (col)--(t1); \draw[e] (col)--(t2);
+  \node[font=\bfseries\color{slate}] at (0,0.9) {Composition (visual) tree};
+
+  % Semantics tree
+  \begin{scope}[xshift=8.6cm]
+    \node[sem] (sroot) at (0,0) {Merged node\\{\scriptsize name = ``Built Different, Trung Kien Le''}\\{\scriptsize role = Button, actions = \{Open, Bookmark\}}};
+    \node[sem] (s1) at (-1.6,-2.2) {name:\\``Built Different''};
+    \node[sem] (s2) at (1.6,-2.2) {name:\\``Trung Kien Le''};
+    \draw[se] (sroot)--(s1); \draw[se] (sroot)--(s2);
+    \node[font=\bfseries\color{brandgreen}] at (0,0.95) {Semantics tree};
+  \end{scope}
+
+  \draw[-{Stealth[length=2.5mm]},brandblue,line width=1pt,dashed]
+     (3.0,-1.5) to[bend left=12] node[above,font=\scriptsize\color{brandblue}]{TalkBack reads} (5.7,-0.6);
+\end{tikzpicture}
+\caption{The visual tree (left) is what is drawn; the semantics tree (right) is what TalkBack reads.
+The decorative image is dropped and the two texts are \emph{merged} into one meaningful node ---
+techniques covered in Sections~\ref{sec:core} and~\ref{sec:adv}.}
+\label{fig:trees}
+\end{figure}
+
+\textbf{Assistive services} such as TalkBack (screen reader) and Switch Access run as background
+system services. They subscribe to the \emph{merged} semantics tree, convert each node into speech or
+a scan target, and translate user gestures back into actions. A screen can therefore look perfect yet
+be unusable if its semantics tree is missing, wrong, or badly ordered. Everything that follows is
+about shaping that tree correctly in Jetpack Compose.
+
+\subsection{Jetpack Compose in one paragraph}
+
+Jetpack Compose is Android's modern declarative UI toolkit (conceptually similar to React). UI is
+described by \emph{composable functions}; state changes trigger recomposition. Crucially, Compose
+generates the semantics tree from \code{Modifier.semantics} blocks and from the built-in semantics of
+Material components, which gives us fine-grained, code-level control over exactly what assistive
+technology perceives.

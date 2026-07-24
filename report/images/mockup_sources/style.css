@@ -1,0 +1,42 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root{
+  --primary:#3B5BDB; --bg:#F5F6FA; --surface:#fff; --on:#1A1C1E; --var:#44474E;
+  --green:#12B886; --orange:#F76707; --purple:#AE3EC9;
+}
+html,body{background:#c7cdda;}
+body{ font-family:'Segoe UI',Roboto,system-ui,sans-serif; display:flex; gap:26px;
+  padding:26px; align-items:flex-start; flex-wrap:wrap; }
+.phone{ width:390px; height:844px; background:var(--bg); border-radius:42px;
+  border:11px solid #0d0f16; overflow:hidden; position:relative;
+  box-shadow:0 20px 55px rgba(0,0,0,.4); display:flex; flex-direction:column; }
+.sb{ height:36px; display:flex; align-items:center; justify-content:space-between;
+  padding:0 22px; font-size:13px; font-weight:600; color:var(--on); }
+.sb .r{ letter-spacing:2px; }
+.ab{ height:58px; display:flex; align-items:center; justify-content:space-between;
+  padding:0 10px 0 20px; }
+.ab .title{ font-size:23px; font-weight:700; color:var(--on); }
+.ab .grp{ display:flex; align-items:center; }
+.ib{ width:48px; height:48px; border-radius:50%; display:flex; align-items:center;
+  justify-content:center; color:var(--on); font-size:21px; }
+.content{ flex:1; overflow:hidden; padding:6px 16px; }
+.card{ background:var(--surface); border-radius:16px; padding:12px; display:flex;
+  align-items:center; gap:12px; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,.11); }
+.cover{ width:56px; height:56px; border-radius:12px; flex-shrink:0; display:flex;
+  align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:24px; }
+.meta{ flex:1; min-width:0; }
+.t1{ font-size:17px; font-weight:600; color:var(--on); }
+.t2{ font-size:14px; color:var(--var); margin-top:2px; }
+.t3{ font-size:12.5px; color:var(--var); margin-top:2px; }
+.trail{ display:flex; }
+.trail .ib{ font-size:19px; color:var(--var); }
+.section{ font-size:20px; font-weight:700; color:var(--on); margin:10px 4px 8px; }
+.badge{ background:var(--primary); color:#fff; font-size:11px; font-weight:700;
+  padding:2px 8px; border-radius:10px; }
+.hero{ background:var(--primary); color:#fff; border-radius:16px; padding:16px;
+  display:flex; align-items:center; gap:12px; margin:6px 0 16px; }
+.hero .l{ font-size:12.5px; font-weight:600; opacity:.9; letter-spacing:.3px; }
+.hero .t{ font-size:17px; font-weight:700; margin-top:3px; }
+.hero .s{ font-size:14px; margin-top:3px; opacity:.95; }
+.hero .p{ width:56px; height:56px; border-radius:50%; background:rgba(255,255,255,.24);
+  display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0; }
+.glyph{ font-family:'Segoe UI Symbol','Segoe UI',sans-serif; }

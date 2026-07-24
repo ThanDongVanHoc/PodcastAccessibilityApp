@@ -1,0 +1,46 @@
+\section{Appendix A --- Task division}
+\addcontentsline{toc}{section}{Appendix A --- Task division}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}l l Y@{}}
+\toprule
+\textbf{Member} & \textbf{Research topic} & \textbf{Report \& demo responsibility} \\
+\midrule
+Phát   & Accessibility foundations & Introduction, Background: WCAG/POUR, EAA, TalkBack, Semantics vs Composition tree, \code{liveRegion} concept. \\
+Phong  & Core Compose semantics & Technical Approach I: \code{contentDescription}, roles, \code{stateDescription}, 48\,dp targets, font scaling; fixed the app's basic UI defects. \\
+Khương & Advanced semantics \& navigation & Technical Approach II: \code{mergeDescendants}, \code{clearAndSetSemantics}, \code{hideFromAccessibility}, \code{customActions}, traversal; built the advanced demos. \\
+Tính   & Testing \& evaluation & Case-study integration, TalkBack/Scanner/Inspector/ATF testing, Evaluation, Conclusion; assembled the project and this report. \\
+\bottomrule
+\end{tabularx}
+\caption{Division of research and writing across the group of four.}
+\end{table}
+
+\section{Appendix B --- Running the app}
+\addcontentsline{toc}{section}{Appendix B --- Running the app}
+
+\begin{enumerate}[leftmargin=1.4em]
+  \item Open the \texttt{PodcastAccessibilityApp} folder in Android Studio (Koala or newer); let it
+        sync and generate the Gradle wrapper and \texttt{local.properties}.
+  \item Run the \texttt{app} configuration on an emulator or device (\texttt{minSdk 24},
+        \texttt{targetSdk 34}).
+  \item To experience the accessibility work, enable \textbf{TalkBack}, install
+        \textbf{Accessibility Scanner}, and set the system \textbf{font size} to 200\%.
+  \item Run the instrumented checks: \texttt{./gradlew connectedAndroidTest}.
+\end{enumerate}
+
+\textbf{Project layout.} \texttt{data/} holds the models and the \code{PodcastRepository} interface
+with its mock; \texttt{ui/} holds the theme, navigation, and the \texttt{home}, \texttt{detail}, and
+\texttt{player} screens. Section~\ref{sec:casestudy}, Table~\ref{tab:map} maps every technique to its
+file.
+
+\section*{Limitations of this report}
+\addcontentsline{toc}{section}{Limitations}
+
+This is a front-end study. The app ships with mocked data and no real audio engine, so performance
+and networked-state accessibility (e.g. announcing buffering under poor connectivity) are described
+at the design level rather than measured. The Agoda case study used a single device and one capture
+pass; its figures demonstrate the evidence-collection \emph{process} and must not be read as an audit
+of Agoda. Absolute WCAG conformance is likewise not claimed --- only a principled mapping of
+technology-neutral criteria onto Android.
