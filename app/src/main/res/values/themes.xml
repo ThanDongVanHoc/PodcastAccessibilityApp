@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base theme delegates almost everything to Compose Material3.
+         We only need a Material3 parent so the Activity has a valid theme before
+         setContent() runs. -->
+    <style name="Theme.PodcastAccessibility" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>
