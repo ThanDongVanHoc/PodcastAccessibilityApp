@@ -35,7 +35,7 @@ import com.mobile.podcast.data.repository.MockPodcastRepository
  *  - The app-bar title carries `heading()` so TalkBack users can jump between headings.
  *  - `Continue listening` is visually below the bar but should be announced FIRST. We wrap the whole
  *    screen in `isTraversalGroup = true` and give that banner the lowest `traversalIndex`, so it wins
- *    the reading order without moving visually. (See Khuong's chapter on traversal order.)
+ *    the reading order without moving visually. (See the report section on traversal order.)
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

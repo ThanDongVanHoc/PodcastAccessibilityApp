@@ -10,7 +10,7 @@ import org.junit.Rule
 import org.junit.Test
 
 /**
- * Automated accessibility checks (Tinh's testing chapter).
+ * Automated accessibility checks (see the Testing & Evaluation section of the report).
  *
  * These demonstrate the two Compose-testing ideas from the report:
  *  1. Asserting semantics contracts — a control has the accessible name a screen reader will speak.

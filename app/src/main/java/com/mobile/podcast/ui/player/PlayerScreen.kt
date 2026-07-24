@@ -48,7 +48,7 @@ import com.mobile.podcast.ui.components.CoverArt
  *
  * ACCESSIBILITY:
  *  - A `liveRegion` line announces "Now playing <title>" / "Paused" automatically when the state
- *    flips, so blind users get feedback without hunting for the button. (Phat's LiveRegion concept.)
+ *    flips, so blind users get feedback without hunting for the button (the LiveRegion concept).
  *  - The transport row (rewind / play / forward) uses generously sized, individually labelled
  *    targets.
  *  - The speed control announces its current value via contentDescription.

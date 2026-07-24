@@ -26,7 +26,7 @@ import com.mobile.podcast.R
 /**
  * Custom circular play/pause control (like Spotify's).
  *
- * ACCESSIBILITY (core — Phong's chapter): a bare clickable [Box] tells assistive tech nothing.
+ * ACCESSIBILITY (core semantics): a bare clickable [Box] tells assistive tech nothing.
  * We explicitly declare:
  *  - `role = Role.Button`      so TalkBack announces "Button".
  *  - `contentDescription`      the fixed name of the control ("Play" / "Pause").

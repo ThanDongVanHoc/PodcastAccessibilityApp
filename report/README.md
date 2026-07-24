@@ -19,15 +19,15 @@ Output: `main.pdf` (≈18 pages).
 ```
 main.tex               preamble, fonts, Kotlin listing style, section includes
 sections/
-  00_title.tex         title page + member/role table
-  01_introduction.tex  Introduction (Phát)
-  02_background.tex     Background: EAA/WCAG, POUR, Composition vs Semantics tree (Phát)
-  03_casestudy.tex      App overview, architecture, technique→file map (Tính)
-  04_core_semantics.tex Core semantics (Phong)
-  05_advanced_semantics.tex  Advanced semantics & navigation (Khương)
-  06_testing_evaluation.tex  Testing, Scanner case study, metrics, trade-offs (Tính)
+  00_title.tex         title page
+  01_introduction.tex  Introduction
+  02_background.tex     Background: EAA/WCAG, POUR, Composition vs Semantics tree
+  03_casestudy.tex      App overview, architecture, technique→file map
+  04_core_semantics.tex Core semantics
+  05_advanced_semantics.tex  Advanced semantics & navigation
+  06_testing_evaluation.tex  Testing, Scanner case study, metrics, trade-offs
   07_conclusion.tex     Conclusion + AI usage
-  08_appendix.tex       Task division, run instructions, limitations
+  08_appendix.tex       Run instructions, limitations
   09_references.tex     Bibliography
 images/
   home.png detail.png player.png   app screens

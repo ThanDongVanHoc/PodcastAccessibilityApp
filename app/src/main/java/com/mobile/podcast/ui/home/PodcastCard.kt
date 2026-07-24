@@ -34,7 +34,7 @@ import com.mobile.podcast.ui.components.CoverArt
 /**
  * A podcast row on the Discover screen.
  *
- * ACCESSIBILITY (advanced — Khuong's chapter):
+ * ACCESSIBILITY (advanced semantics):
  *  - The whole card is ONE focus stop. `mergeDescendants = true` collapses cover + title + author
  *    + metadata into a single TalkBack utterance instead of 4-5 separate swipes.
  *  - The nested bookmark and overflow icon buttons would each steal focus and fail as tiny targets.
