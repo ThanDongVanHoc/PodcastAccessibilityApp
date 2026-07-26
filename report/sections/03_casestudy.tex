@@ -3,10 +3,10 @@
 
 \subsection{Overview}
 
-To ground the techniques in something concrete, we built \emph{Accessible Podcast}, a small but
-complete Jetpack Compose application. It is intentionally \textbf{front-end only}: there is no
+To ground the techniques in something concrete, we built \textbf{Accessible Podcast}, a small but
+complete Jetpack Compose application. It is front-end only: there is no
 network or database. All content is served by an in-memory mock that implements a repository
-interface, so the UI code is identical to what it would be against a real backend, but the project
+interface, so the UI code is identical to what it would be with a real backend, but the project
 runs anywhere with no configuration.
 
 \subsection{User flow}
@@ -15,21 +15,21 @@ The app implements the classic three-step listening flow, plus a resume shortcut
 (Figure~\ref{fig:flow}).
 
 \begin{figure}[h]
-\centering
-\begin{tikzpicture}[
-  s/.style={rounded corners=6pt,draw=brandblue,line width=1pt,fill=softbg,
-    minimum width=3.1cm,minimum height=1.1cm,align=center,font=\small},
-  a/.style={-{Stealth[length=2.5mm]},draw=brandblue,line width=1pt,font=\scriptsize}
-]
-  \node[s] (h) {\textbf{Discover}\\{\scriptsize list of shows}};
-  \node[s,right=2.2cm of h] (d) {\textbf{Podcast detail}\\{\scriptsize episodes}};
-  \node[s,right=2.2cm of d] (p) {\textbf{Now Playing}\\{\scriptsize transport controls}};
-  \draw[a] (h) -- node[above]{tap card} (d);
-  \draw[a] (d) -- node[above]{tap episode} (p);
-  \draw[a] (h.south) to[bend right=28] node[below,pos=0.5]{``Continue listening''} (p.south);
-\end{tikzpicture}
-\caption{User flow. Each transition is reachable by TalkBack double-tap and by Switch Access.}
-\label{fig:flow}
+	\centering
+	\begin{tikzpicture}[
+		s/.style={rounded corners=6pt,draw=brandblue,line width=1pt,fill=softbg,
+				minimum width=3.1cm,minimum height=1.1cm,align=center,font=\small},
+		a/.style={-{Stealth[length=2.5mm]},draw=brandblue,line width=1pt,font=\scriptsize}
+		]
+		\node[s] (h) {\textbf{Discover}\\{\scriptsize list of shows}};
+		\node[s,right=2.2cm of h] (d) {\textbf{Podcast detail}\\{\scriptsize episodes}};
+		\node[s,right=2.2cm of d] (p) {\textbf{Now Playing}\\{\scriptsize transport controls}};
+		\draw[a] (h) -- node[above]{tap card} (d);
+		\draw[a] (d) -- node[above]{tap episode} (p);
+		\draw[a] (h.south) to[bend right=28] node[below,pos=0.5]{``Continue listening''} (p.south);
+	\end{tikzpicture}
+	\caption{User flow. Each transition is reachable by TalkBack double-tap and by Switch Access.}
+	\label{fig:flow}
 \end{figure}
 
 \subsection{Architecture}
@@ -39,28 +39,28 @@ The code is organised into a thin data layer and a Compose UI layer
 mock, which is the ``interface / mock'' boundary that stands in for a backend.
 
 \begin{figure}[h]
-\centering
-\begin{tikzpicture}[
-  layer/.style={rounded corners=5pt,draw,line width=0.8pt,minimum height=1cm,align=center,font=\small,text width=3.4cm},
-  ui/.style={layer,draw=brandblue,fill=brandblue!7},
-  dm/.style={layer,draw=brandgreen,fill=brandgreen!7},
-  e/.style={-{Stealth[length=2mm]},draw=slate}
-]
-  \node[ui] (nav) at (0,0) {\textbf{navigation}\\{\scriptsize NavHost: Home/Detail/Player}};
-  \node[ui] (home) at (-3.6,-1.7) {\textbf{home}\\{\scriptsize HomeScreen, PodcastCard}};
-  \node[ui] (det) at (0,-1.7) {\textbf{detail}\\{\scriptsize DetailScreen, EpisodeRow}};
-  \node[ui] (play) at (3.6,-1.7) {\textbf{player}\\{\scriptsize PlayerScreen, PlayToggle}};
-  \node[dm] (repo) at (0,-3.6) {\textbf{PodcastRepository}\\{\scriptsize interface}};
-  \node[dm] (mock) at (-3.6,-3.6) {\textbf{MockPodcast\-Repository}};
-  \node[dm] (model) at (3.6,-3.6) {\textbf{model}\\{\scriptsize Podcast, Episode}};
-  \draw[e] (nav)--(home); \draw[e] (nav)--(det); \draw[e] (nav)--(play);
-  \draw[e] (home)--(repo); \draw[e] (det)--(repo); \draw[e] (play)--(repo);
-  \draw[e,dashed,brandgreen] (mock)-- node[below,font=\scriptsize]{implements} (repo);
-  \draw[e] (repo)--(model);
-\end{tikzpicture}
-\caption{Package architecture. The Compose UI layer (blue) talks to a single repository interface;
-the mock (green) is the only implementation and can be swapped for a real one with no UI change.}
-\label{fig:arch}
+	\centering
+	\begin{tikzpicture}[
+		layer/.style={rounded corners=5pt,draw,line width=0.8pt,minimum height=1cm,align=center,font=\small,text width=3.4cm},
+		ui/.style={layer,draw=brandblue,fill=brandblue!7},
+		dm/.style={layer,draw=brandgreen,fill=brandgreen!7},
+		e/.style={-{Stealth[length=2mm]},draw=slate}
+		]
+		\node[ui] (nav) at (0,0) {\textbf{navigation}\\{\scriptsize NavHost: Home/Detail/Player}};
+		\node[ui] (home) at (-3.6,-1.7) {\textbf{home}\\{\scriptsize HomeScreen, PodcastCard}};
+		\node[ui] (det) at (0,-1.7) {\textbf{detail}\\{\scriptsize DetailScreen, EpisodeRow}};
+		\node[ui] (play) at (3.6,-1.7) {\textbf{player}\\{\scriptsize PlayerScreen, PlayToggle}};
+		\node[dm] (repo) at (0,-3.6) {\textbf{PodcastRepository}\\{\scriptsize interface}};
+		\node[dm] (mock) at (-3.6,-3.6) {\textbf{MockPodcast\-Repository}};
+		\node[dm] (model) at (3.6,-3.6) {\textbf{model}\\{\scriptsize Podcast, Episode}};
+		\draw[e] (nav)--(home); \draw[e] (nav)--(det); \draw[e] (nav)--(play);
+		\draw[e] (home)--(repo); \draw[e] (det)--(repo); \draw[e] (play)--(repo);
+		\draw[e,dashed,brandgreen] (mock)-- node[below,font=\scriptsize]{implements} (repo);
+		\draw[e] (repo)--(model);
+	\end{tikzpicture}
+	\caption{Package architecture. The Compose UI layer (blue) talks to a single repository interface;
+		the mock (green) is the only implementation and can be swapped for a real one with no UI change.}
+	\label{fig:arch}
 \end{figure}
 
 \subsection{The mock data layer}
@@ -84,25 +84,25 @@ Table~\ref{tab:map} maps every accessibility technique discussed in this report 
 the project, so the demo and the prose stay in lock-step.
 
 \begin{table}[h]
-\centering
-\small
-\begin{tabularx}{\textwidth}{@{}l l Y@{}}
-\toprule
-\textbf{Report section} & \textbf{Technique} & \textbf{File} \\
-\midrule
-Core (§\ref{sec:core}) & \code{contentDescription}, decorative \code{null} & \texttt{ui/components/CoverArt.kt} \\
-Core & \code{Role.Button} + \code{stateDescription} & \texttt{ui/player/PlayToggle.kt} \\
-Core & 48\,dp touch targets & \texttt{ui/home/PodcastCard.kt} \\
-Core & \code{sp} typography, font scaling & \texttt{ui/theme/Type.kt} \\
-Core & heading navigation & \texttt{ui/home/HomeScreen.kt} \\
-Advanced (§\ref{sec:adv}) & \code{mergeDescendants} & \texttt{PodcastCard.kt}, \texttt{EpisodeRow.kt} \\
-Advanced & \code{clearAndSetSemantics} + \code{customActions} & \texttt{EpisodeRow.kt} \\
-Advanced & \code{hideFromAccessibility} & \texttt{CoverArt.kt} \\
-Advanced & \code{isTraversalGroup} + \code{traversalIndex} & \texttt{HomeScreen.kt} \\
-Background & \code{liveRegion} announcements & \texttt{ui/player/PlayerScreen.kt} \\
-Testing (§\ref{sec:test}) & Compose assertions, ATF & \texttt{androidTest/AccessibilityTest.kt} \\
-\bottomrule
-\end{tabularx}
-\caption{Technique-to-file map. Every claim in the report is backed by runnable code.}
-\label{tab:map}
+	\centering
+	\small
+	\begin{tabularx}{\textwidth}{@{}l l Y@{}}
+		\toprule
+		\textbf{Report section}   & \textbf{Technique}                                 & \textbf{File}                                   \\
+		\midrule
+		Core (§\ref{sec:core})    & \code{contentDescription}, decorative \code{null}  & \texttt{ui/components/CoverArt.kt}              \\
+		Core                      & \code{Role.Button} + \code{stateDescription}       & \texttt{ui/player/PlayToggle.kt}                \\
+		Core                      & 48\,dp touch targets                               & \texttt{ui/home/PodcastCard.kt}                 \\
+		Core                      & \code{sp} typography, font scaling                 & \texttt{ui/theme/Type.kt}                       \\
+		Core                      & heading navigation                                 & \texttt{ui/home/HomeScreen.kt}                  \\
+		Advanced (§\ref{sec:adv}) & \code{mergeDescendants}                            & \texttt{PodcastCard.kt}, \texttt{EpisodeRow.kt} \\
+		Advanced                  & \code{clearAndSetSemantics} + \code{customActions} & \texttt{EpisodeRow.kt}                          \\
+		Advanced                  & \code{hideFromAccessibility}                       & \texttt{CoverArt.kt}                            \\
+		Advanced                  & \code{isTraversalGroup} + \code{traversalIndex}    & \texttt{HomeScreen.kt}                          \\
+		Background                & \code{liveRegion} announcements                    & \texttt{ui/player/PlayerScreen.kt}              \\
+		Testing (§\ref{sec:test}) & Compose assertions, ATF                            & \texttt{androidTest/AccessibilityTest.kt}       \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Technique-to-file map. Every claim in the report is backed by runnable code.}
+	\label{tab:map}
 \end{table}
