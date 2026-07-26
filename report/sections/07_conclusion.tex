@@ -1,32 +1,29 @@
 \section{Conclusion}
 
-Accessibility in Compose is not a checkbox but control over the semantics tree at every level: naming
+Accessibility in Compose is not a set of rigid rules but a flexible guidance over the semantics tree at every level: naming
 and hiding nodes correctly (§\ref{sec:core}), then grouping, ordering, and consolidating their
-actions (§\ref{sec:adv}). The payoff is measurable --- a podcast card drops from six focus stops to
-one, the resume banner is announced first, and playback state is spoken the instant it changes --- so
-a TalkBack user completes the full Discover~$\rightarrow$~Detail~$\rightarrow$~Player flow without
-sight.
+actions (§\ref{sec:adv}). The payoff for work taken is measurable in convenience: a podcast card drops from six focus stops to
+one, the resume banner is announced first, and playback state is spoken the instant it changes, so
+a TalkBack user can completes the full Discover~$\rightarrow$~Detail~$\rightarrow$~Player flow without sight.
 
 Verification matters as much as construction (§\ref{sec:test}): TalkBack judges the listening
 experience, Scanner and ATF triage mechanical defects, Layout Inspector explains structure, and
-Compose tests lock semantics against regressions. No layer suffices alone, and --- as the Agoda
-capture showed --- a tool's raw suggestion is a hypothesis, not a defect.
-
-The practical lesson: build accessibility in from the first composable. Prefer Material components for
+Compose tests lock semantics against regressions. No layer's result suffices alone, and they show the element that \textbf{may} have problem in accessiblity, as shown in the Agoda case study.
+The lesson is to integrate accessiblity in parallel with developing the interfaces . Prefer pre-made-accessibility-verified, such as the Material Design, for
 their default semantics, add custom semantics only where the design forces it, and test with the
-assistive technology users actually run.
+assistive technology that users actually use.
 
 \subsection*{Future work}
 
-Version~2: run TalkBack on our own build across a device/version matrix, capture Layout Inspector
-evidence for representative findings, wire ATF into CI, and --- resources permitting --- have users
-who rely on assistive technology evaluate the core tasks.
+Version~2: to run TalkBack on our own build across a device/version matrix, capture Layout Inspector
+evidence for representative findings, wire ATF into CI, and  have users
+who rely on assistive technology evaluate the core tasks if the resource permits.
 
 \section*{Appendix on AI usage}
 \addcontentsline{toc}{section}{Appendix on AI usage}
 
-AI assistants were used as a drafting and formatting aid: structuring the report and generating the
-LaTeX scaffolding and diagrams. The accessibility techniques, app architecture, research decisions,
-and case-study data are the group's own work; every AI-assisted passage was reviewed and edited by
-the members responsible for that section. Code samples are excerpts from the app we wrote, not
-AI-generated boilerplate.
+AI assistants were used as a drafting and formatting aid: to structure the report, generate the
+LaTeX scaffolding and diagrams, and render the annotated UI mockups from our own designs and code.
+The accessibility techniques, app architecture, research decisions, and case-study data are the
+group's own work; every AI-assisted passage was reviewed and edited by the members responsible for
+that section. Code samples are excerpts from the app we wrote, not AI-generated boilerplate.

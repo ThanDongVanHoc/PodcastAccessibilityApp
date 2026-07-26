@@ -3,10 +3,10 @@
 
 Core semantics make one component correct; advanced semantics make a whole screen efficient to
 navigate. They control how many focus stops exist, the order they are read in, and how nested actions
-are reached --- the difference between a technically-labelled UI and one that is fast to drive by
+are reached, which create the difference between a automatically labelled UI and one that is fast to drive by
 swipe or switch.
 
-\subsection{Semantic merging: fewer, richer focus stops}
+\subsection{Semantic merging}
 
 By default every text node is its own focus stop. A podcast card with a cover, title, author, and
 metadata therefore costs a TalkBack user 4--6 swipes to cross --- multiplied across a list of shows,
@@ -33,12 +33,12 @@ Card(
 ) { /* cover + title + author + metadata + nested icon buttons */ }
 \end{lstlisting}
 
-\textbf{Constraint.} A parent cannot merge a child that already merges itself. Interactive
+There is a constraint on merging that a parent cannot merge a child that already merges itself. Interactive
 components (\code{Button}, \code{Switch}, anything with \code{clickable}/\code{toggleable} modifiers) resist
 merging so they remain independently operable. This is why the nested bookmark button needs
 the next technique.
 
-\subsection{Clearing and hiding: \texttt{clearAndSetSemantics} \& \texttt{hideFromAccessibility}}
+\subsection{Clearing and hiding with \texttt{clearAndSetSemantics} \& \texttt{hideFromAccessibility}}
 
 Two modifiers prune the tree:
 
@@ -52,13 +52,13 @@ Two modifiers prune the tree:
 
 In \code{CoverArt.kt} the coloured cover tile is decorative when a text title sits beside it, so we
 hide it. In \code{EpisodeRow.kt} the three trailing icon buttons are cleared so they do not each
-steal focus --- their actions are re-exposed on the row (next subsection).
+steal focus their actions are re-exposed on the row (next subsection).
 
 \subsection{Custom accessibility actions}
 
 Nested icon buttons are an anti-pattern for screen readers: they are tiny targets and they clutter
-the swipe path (50 cards $\times$ 3 buttons = 150 extra swipes). The fix is to \emph{clear} the
-physical buttons and \emph{elevate} their operations to \code{customActions} on the parent row, where
+the swipe path (50 cards $\times$ 3 buttons = 150 extra swipes). The fix is to clear the
+physical buttons and elevate their operations to \code{customActions} on the parent row, where
 TalkBack surfaces them through its actions menu (``Actions available'').
 
 \begin{lstlisting}[caption={\texttt{EpisodeRow.kt} --- nested actions promoted to the row's actions menu.},captionpos=b]
@@ -80,11 +80,11 @@ Row(
 \end{lstlisting}
 
 A screen-reader user now hears the episode as one sentence, then opens ``Actions'' to Play, Bookmark,
-or Download --- while sighted users still tap the visible 48\,dp buttons directly.
+or Download, while sighted users still tap the visible 48\,dp buttons directly.
 
 \subsection{Traversal order}
 
-Assistive tech reads geometrically (top-to-bottom, left-to-right), which breaks on non-linear
+Assistive tech normally reads in fixed order (top-to-bottom, then left-to-right), which breaks on non-linear
 layouts. Two modifiers fix it: \code{isTraversalGroup = true} draws a boundary that must be read
 completely before moving on, and \code{traversalIndex} (a \code{Float}, lowest first) reorders within
 that boundary. A common pitfall is setting \code{traversalIndex} \emph{without} a group: because all

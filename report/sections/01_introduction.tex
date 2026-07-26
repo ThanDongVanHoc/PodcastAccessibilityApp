@@ -2,20 +2,19 @@
 
 \subsection{Why accessibility}
 
-About one in six people lives with a disability that changes how they use a phone; for a blind user
-the screen reader \emph{is} the interface. Accessibility is the practice of building software so
-these users get equal access --- and since June~2022 (EAA, §\ref{sec:legal}) it is a legal
-requirement in the EU, not a courtesy.
+About one in six people lives with a disability that changes how they use a phone or a computer: for a vision-impaired user
+the screen reader \emph{is} the interface, for a hearing-impaired user the subtitles are how they ``hear". Accessibility is the practice of building software so
+these users get equal access. Since June~2022 (EAA, §\ref{sec:legal}) it is a legal
+requirement in the European Union (EU)
 
-We chose a podcast/audiobook player on purpose: audio is one of the few digital experiences a blind
-user can consume on exactly equal terms with a sighted user --- \emph{if} the surrounding controls
+We chose a podcast/audiobook player on purpose: audio is one of the few digital experiences that user can consume regardless of their vision if the surrounding controls
 are reachable. The entire accessibility gap here lives in the UI, which makes it a clean case study.
 
 \subsection{Goal and scope}
 
 We took a conventional, accessibility-blind podcast UI and rebuilt it to be fully operable by
 TalkBack, Switch Access, and 200\% fonts, justifying every technique. The deliverable is a
-front-end-only Jetpack Compose app (data mocked behind a repository interface --- no backend) plus
+front-end only Jetpack Compose app, where data is mocked to replicate working backed, plus
 this report, in four parts:
 
 \begin{itemize}[leftmargin=1.4em,itemsep=1pt]
@@ -28,7 +27,7 @@ this report, in four parts:
 \subsection{Acceptance bar}
 
 One concrete target drove every decision: \emph{a user who never looks at the screen can open the
-app, browse shows, pick an episode, and control playback with TalkBack alone}. Figure~\ref{fig:appflow}
+	app, browse shows, pick an episode, and control playback with TalkBack alone}. Figure~\ref{fig:appflow}
 is what a sighted user sees; the rest of the report is what a screen-reader user hears at each step.
 
 \begin{figure}[h]

@@ -1,13 +1,13 @@
 \section{Technical Approach I --- Core Semantics}
 \label{sec:core}
 
-Five modifiers make a single component accessible --- labelling, roles, state, touch-target size, and
-scalable type. They fix the most common and most damaging screen-reader defects.
+Five modifiers make a singular component accessible: labelling, roles, state, touch-target size, and
+scalable type. They fix the most common and most damaging screen-reader confusion.
 
-\subsection{Content descriptions: naming visual elements}
+\subsection{Content descriptions}
 
-A screen reader cannot see an icon; it can only read the icon's text alternative --- in Compose, the
-\code{contentDescription} parameter. Three rules make a good label:
+A screen reader cannot see an icon; it can only read the icon's text alternative. In Jetpack Compose, the
+text alternative is given by \code{contentDescription} parameter. Three following rules make a good label:
 
 \begin{itemize}[leftmargin=1.4em]
 	\item \textbf{Succinct \& action-oriented.} Avoid ``Image of'' / ``Button to''. The element's name is
@@ -62,14 +62,14 @@ fun PlayToggle(isPlaying: Boolean, onToggle: () -> Unit) {
 }
 \end{lstlisting}
 
-TalkBack now announces \emph{``Pause, button, Playing''} --- name, role, and state --- which is
+TalkBack now announces \emph{``Pause, button, Playing''}, giving the name, role, and state, which is
 exactly how Spotify's custom playback control behaves.
 
 \subsection{Touch-target sizing}
 
 Users with motor impairments, or anyone tapping on a moving bus, need a target they can hit
 reliably. Material Design mandates a minimum interactive size of \textbf{48\,dp $\times$ 48\,dp}
-(WCAG~2.5.5 asks for 44\,px). The visual icon can stay small; only the \emph{touchable area} must
+(WCAG~2.5.5 asks for 44\,px). The visual icon can stay small; only the touchable area must
 grow. Compose does this automatically for Material components and, for custom ones, via
 \code{minimumInteractiveComponentSize()}:
 
@@ -82,19 +82,19 @@ IconButton(
 ) { Icon(Icons.Filled.BookmarkBorder, contentDescription = null) }
 \end{lstlisting}
 
-This is the same pattern Gmail uses for the small ``star'' icon: a 24\,dp glyph with a 48\,dp hit
+This is the same pattern Gmail uses for the small ``star'', or favourite, icon: a 24\,dp glyph with a 48\,dp hit
 area, so users do not open the email by accident when they meant to star it.
 
 \subsection{Scalable typography}
 
-Android~14 introduced \textbf{non-linear font scaling} up to 200\%: small text grows a lot while
+Android~14 introduced \textbf{non-linear} font scaling up to 200\%: small text grows a lot while
 already-large headings grow less, preserving hierarchy. To benefit, code must separate \emph{text
 	size} from \emph{layout size}:
 
 \begin{enumerate}[leftmargin=1.4em]
 	\item Text sizes always in \code{sp} --- Compose applies the non-linear math automatically.
 	\item Paddings and constraints always in \code{dp}.
-	\item \textbf{Never} hard-code a \code{height()} on a text container; use \code{defaultMinSize} or
+	\item Never hard-code a \code{height()} on a text container; use \code{defaultMinSize} or
 	      padding so it can grow.
 \end{enumerate}
 
