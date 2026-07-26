@@ -7,16 +7,16 @@ techniques that fix the most common and most damaging defects a screen-reader us
 
 \subsection{Content descriptions: naming visual elements}
 
-Screen readers cannot ``see'' an icon; they can only read its text alternative. In Compose this is
+Screen readers cannot describe an icon based on their appearance, they can only read its text alternative. In Compose this is
 the \code{contentDescription} parameter. Three rules govern good labels:
 
 \begin{itemize}[leftmargin=1.4em]
-  \item \textbf{Succinct \& action-oriented.} Avoid ``Image of'' / ``Button to'' --- the role is
-        announced separately.
-  \item \textbf{Localized.} Always use \code{stringResource()} so labels translate with the device
-        language.
-  \item \textbf{Hide the decorative.} Purely decorative graphics must be removed from the tree so
-        they do not add noise.
+	\item \textbf{Succinct \& action-oriented.} Avoid ``Image of'' / ``Button to''. The element's name is
+	      announced separately.
+	\item \textbf{Localized.} Always use \code{stringResource()} so labels translate with the device
+	      language.
+	\item \textbf{Hide the decorative.} Purely decorative graphics must be removed from the tree so
+	      they do not add noise.
 \end{itemize}
 
 \begin{lstlisting}[caption={Meaningful icons get a localized label; decorative art is hidden.},captionpos=b]
@@ -33,8 +33,8 @@ Box(
 )
 \end{lstlisting}
 
-Real apps apply exactly this split: Instagram gives its action buttons descriptive labels
-(``Like'', ``Comment'') but passes \code{null} to the decorative gradients around stories, so
+Implementation of this: Instagram gives its action buttons descriptive labels
+("Like", "Comment") but passes \code{null} to the decorative gradients around stories, so
 screen-reader users move between real content quickly.
 
 \subsection{Roles and state descriptions on custom controls}
@@ -91,13 +91,13 @@ area, so users do not open the email by accident when they meant to star it.
 
 Android~14 introduced \textbf{non-linear font scaling} up to 200\%: small text grows a lot while
 already-large headings grow less, preserving hierarchy. To benefit, code must separate \emph{text
-size} from \emph{layout size}:
+	size} from \emph{layout size}:
 
 \begin{enumerate}[leftmargin=1.4em]
-  \item Text sizes always in \code{sp} --- Compose applies the non-linear math automatically.
-  \item Paddings and constraints always in \code{dp}.
-  \item \textbf{Never} hard-code a \code{height()} on a text container; use \code{defaultMinSize} or
-        padding so it can grow.
+	\item Text sizes always in \code{sp} --- Compose applies the non-linear math automatically.
+	\item Paddings and constraints always in \code{dp}.
+	\item \textbf{Never} hard-code a \code{height()} on a text container; use \code{defaultMinSize} or
+	      padding so it can grow.
 \end{enumerate}
 
 Figure~\ref{fig:fontscale} shows why the third rule matters: a fixed-height card clips its text at
@@ -105,12 +105,12 @@ Figure~\ref{fig:fontscale} shows why the third rule matters: a fixed-height card
 \code{sp}, so the app passes this test out of the box.
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{images/fontscale.png}
-\caption{The same card at 100\% and at 200\% font scale. A hard-coded \code{height()} in dp (centre)
-clips the title; \code{sp} text with \code{defaultMinSize} (right) lets the container expand so
-nothing is lost.}
-\label{fig:fontscale}
+	\centering
+	\includegraphics[width=\textwidth]{images/fontscale.png}
+	\caption{The same card at 100\% and at 200\% font scale. A hard-coded \code{height()} in dp (centre)
+		clips the title; \code{sp} text with \code{defaultMinSize} (right) lets the container expand so
+		nothing is lost.}
+	\label{fig:fontscale}
 \end{figure}
 
 \subsection{Heading navigation}
