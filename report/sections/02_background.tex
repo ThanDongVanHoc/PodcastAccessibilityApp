@@ -6,8 +6,8 @@
 
 The \textbf{European Accessibility Act} (Directive (EU) 2019/882) requires products sold in the EU to
 meet common accessibility requirements; every member state transposed it into national law by
-June~2022. Its technical yardstick is \textbf{WCAG~2.2}. WCAG targets the web, so for a native app we
-apply it through \emph{WCAG2ICT} and mobile guidance --- mapping each success criterion to its
+June~2022. Its technical yardstick is \textbf{WCAG~2.2}. WCAG targets the web interface designs, so for a native app we
+apply it through \emph{WCAG2ICT} and mobile guidance, in which we map each success criterion to its
 Android equivalent rather than claiming literal conformance.
 
 \subsection{The POUR principles}
@@ -15,10 +15,10 @@ Android equivalent rather than claiming literal conformance.
 WCAG rests on four principles (Figure~\ref{fig:pour}). For a media player they read concretely as:
 
 \begin{itemize}[leftmargin=1.4em,itemsep=1pt]
-	\item \textbf{Perceivable} --- label every transport icon; keep duration text at $\geq$4.5:1 contrast.
-	\item \textbf{Operable} --- play, seek, and bookmark reachable from TalkBack, not only by touch.
-	\item \textbf{Understandable} --- the play button announces ``playing'' vs.\ ``paused''.
-	\item \textbf{Robust} --- expose a correct semantics tree instead of relying on pixels.
+	\item \textbf{Perceivable:}  label every transport icon; keep duration text at $\geq$4.5:1 contrast.
+	\item \textbf{Operable:}  play, seek, and bookmark reachable from TalkBack, not only by touch.
+	\item \textbf{Understandable:}  the play button announces ``playing'' vs.\ ``paused''.
+	\item \textbf{Robust:}  expose a correct semantics tree instead of relying on position or composition tree.
 \end{itemize}
 
 \begin{figure}[h]
@@ -29,23 +29,23 @@ WCAG rests on four principles (Figure~\ref{fig:pour}). For a media player they r
 		]
 		\def\cap#1{{\large\bfseries\color{brandblue}#1}}
 		\node[box] (p) at (0,0) {\cap{P}erceivable\\[2pt]\small Equal information regardless of ability, via text alternatives and adjustable presentation.};
-		\node[box] (o) at (4.2,0) {\cap{O}perable\\[2pt]\small Every action reachable by any input: touch, keyboard, switch, screen reader.};
+		\node[box] (o) at (4.2,0) {\cap{O}perable\\[2pt]\small Every action is doable by any input: touch, keyboard, switch, screen reader.};
 		\node[box] (u) at (8.4,0) {\cap{U}nderstandable\\[2pt]\small Controls are predictable and clearly labelled, with helpful error feedback.};
 		\node[box] (r) at (12.6,0) {\cap{R}obust\\[2pt]\small Reliable, consistent semantics that any assistive tech can interpret.};
 	\end{tikzpicture}
-	\caption{The four POUR principles that underpin WCAG.}
+	\caption{The four POUR principles that are the pillars of WCAG.}
 	\label{fig:pour}
 \end{figure}
 
 \subsection{Two trees, one screen}
 
-The decisive fact for an Android developer: what is drawn and what a screen reader traverses are
-\emph{two separate trees} (Figure~\ref{fig:trees}).
+In Android, there is a difference between what user can see and what a screen reader  can interpret.
+With Jetpack Compose, each of them are represented by a tree (Figure~\ref{fig:trees}).
 
 \begin{itemize}[leftmargin=1.4em,itemsep=1pt]
-	\item \textbf{Composition tree} --- the visual hierarchy; nodes are boxes, text, and images ordered
+	\item \textbf{Composition tree:} the visual hierarchy; nodes are boxes, text, and images ordered
 	      by draw position.
-	\item \textbf{Semantics tree} --- runs in parallel; each node carries a name, role, state, and
+	\item \textbf{Semantics tree:}  runs in parallel; each node carries a name, role, state, and
 	      supported actions. It is the only thing assistive services can read.
 \end{itemize}
 
@@ -82,12 +82,12 @@ The decisive fact for an Android developer: what is drawn and what a screen read
 		(3.0,-1.5) to[bend left=12] node[above,font=\scriptsize\color{brandblue}]{TalkBack reads} (5.7,-0.6);
 	\end{tikzpicture}
 	\caption{The visual tree (left) is drawn; the semantics tree (right) is read by TalkBack. The
-		decorative image is dropped and the two texts are \emph{merged} into one node --- the techniques
+		decorative image is dropped and the two texts are merged into one node. The techniques
 		of §\ref{sec:core} and~§\ref{sec:adv}.}
 	\label{fig:trees}
 \end{figure}
 
-TalkBack and Switch Access run as system services that subscribe to the \emph{merged} semantics tree,
+TalkBack and Switch Access run as system services that subscribe to the merged semantics tree,
 turn each node into speech or a scan stop, and translate gestures back into actions. A pixel-perfect
 screen is unusable if its semantics tree is missing, mislabelled, or misordered. Every technique in
 this report shapes that tree.
@@ -96,5 +96,5 @@ this report shapes that tree.
 
 Compose is Android's declarative UI toolkit: the UI is a function of state, and state changes trigger
 recomposition. It builds the semantics tree from Material components' built-in semantics plus
-\code{Modifier.semantics} blocks --- giving code-level control over exactly what assistive technology
+\code{Modifier.semantics} blocks, giving code-level control over exactly what assistive technology
 perceives.

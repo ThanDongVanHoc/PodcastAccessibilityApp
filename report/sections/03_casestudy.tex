@@ -1,11 +1,10 @@
-\section{The Case-Study App: \emph{Accessible Podcast}}
+\section{The Case-Study App: Accessible Podcast}
 \label{sec:casestudy}
 
 \subsection{Overview}
 
 We built \textbf{Accessible Podcast}, a complete front-end Compose app, to ground the techniques. An
-in-memory mock implements the \code{PodcastRepository} interface, so the UI code is byte-for-byte
-identical to a real-backend version but runs anywhere with no configuration.
+in-memory mock implements the \code{PodcastRepository} interface, so the UI code is identical to a real-backend version but runs anywhere with no configuration.
 
 \subsection{User flow}
 
@@ -33,8 +32,8 @@ The app implements the classic three-step listening flow, plus a resume shortcut
 \subsection{Architecture}
 
 The code is organised into a thin data layer and a Compose UI layer
-(Figure~\ref{fig:arch}). The UI depends only on the \code{PodcastRepository} interface, never on the
-mock, which is the ``interface / mock'' boundary that stands in for a backend.
+(Figure~\ref{fig:arch}). The UI depends
+only on the \code{PodcastRepository} interface, never on the mock, thus we can substitute a real backend in without changing the UI's declaration and logic.
 
 \begin{figure}[h]
 	\centering
@@ -64,7 +63,7 @@ mock, which is the ``interface / mock'' boundary that stands in for a backend.
 \subsection{The mock data layer}
 
 The repository exposes an observable catalogue as a \code{StateFlow}. Toggling a bookmark mutates the
-flow, so every screen recomposes exactly as it would against a reactive backend --- which also lets
+flow, so every screen recomposes exactly as it would against a reactive backend, which also lets
 us verify that state changes are announced to TalkBack.
 
 \begin{lstlisting}[caption={The repository interface the whole UI depends on.},captionpos=b]
