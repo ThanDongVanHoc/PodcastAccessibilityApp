@@ -1,14 +1,13 @@
 \section{Technical Approach I --- Core Semantics}
 \label{sec:core}
 
-This section covers the foundational modifiers that make an individual component accessible:
-labelling, roles, state descriptions, touch-target sizing, and scalable typography. These are the
-techniques that fix the most common and most damaging defects a screen-reader user encounters.
+Five modifiers make a single component accessible --- labelling, roles, state, touch-target size, and
+scalable type. They fix the most common and most damaging screen-reader defects.
 
 \subsection{Content descriptions: naming visual elements}
 
-Screen readers cannot describe an icon based on their appearance, they can only read its text alternative. In Compose this is
-the \code{contentDescription} parameter. Three rules govern good labels:
+A screen reader cannot see an icon; it can only read the icon's text alternative --- in Compose, the
+\code{contentDescription} parameter. Three rules make a good label:
 
 \begin{itemize}[leftmargin=1.4em]
 	\item \textbf{Succinct \& action-oriented.} Avoid ``Image of'' / ``Button to''. The element's name is
@@ -33,9 +32,8 @@ Box(
 )
 \end{lstlisting}
 
-Implementation of this: Instagram gives its action buttons descriptive labels
-("Like", "Comment") but passes \code{null} to the decorative gradients around stories, so
-screen-reader users move between real content quickly.
+In practice: Instagram labels its action buttons (``Like'', ``Comment'') but passes \code{null} to
+the decorative story gradients, so screen-reader users jump straight between real content.
 
 \subsection{Roles and state descriptions on custom controls}
 

@@ -47,4 +47,7 @@ report/*.log
 report/*.out
 report/*.toc
 report/*.synctex.gz
+report/*.fls
+report/*.fdb_latexmk
+report/*.xdv
 report/pgs/

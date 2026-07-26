@@ -1,37 +1,32 @@
 \section{Conclusion}
 
-Accessibility in Jetpack Compose is not a checkbox but a design discipline that spans the whole
-stack. This project took an ordinary podcast UI and made it usable without sight by working the
-semantics tree deliberately at every level: naming and hiding elements correctly
-(Section~\ref{sec:core}), then shaping how those elements are grouped, ordered, and acted upon
-(Section~\ref{sec:adv}). The result is a three-screen app in which a TalkBack user can discover a
-show, choose an episode, and control playback --- hearing a clean sentence per card, reaching every
-action through the actions menu, and getting spoken feedback the moment playback state changes.
+Accessibility in Compose is not a checkbox but control over the semantics tree at every level: naming
+and hiding nodes correctly (§\ref{sec:core}), then grouping, ordering, and consolidating their
+actions (§\ref{sec:adv}). The payoff is measurable --- a podcast card drops from six focus stops to
+one, the resume banner is announced first, and playback state is spoken the instant it changes --- so
+a TalkBack user completes the full Discover~$\rightarrow$~Detail~$\rightarrow$~Player flow without
+sight.
 
-Equally important is the evaluation discipline of Section~\ref{sec:test}: TalkBack answers the
-listening question, Scanner triages quickly, Layout Inspector explains the structure, Compose UI
-Testing protects semantics against regressions, and ATF automates the mechanical checks. The value
-lies in \emph{combining} these layers, defining a clear scope, and --- as our Agoda case study
-showed --- never mistaking a tool's raw suggestion for a confirmed defect.
+Verification matters as much as construction (§\ref{sec:test}): TalkBack judges the listening
+experience, Scanner and ATF triage mechanical defects, Layout Inspector explains structure, and
+Compose tests lock semantics against regressions. No layer suffices alone, and --- as the Agoda
+capture showed --- a tool's raw suggestion is a hypothesis, not a defect.
 
-Our broader takeaway is that accessible design is cheaper and better when it is built in from the
-first composable rather than retrofitted: preferring Material components with sound default
-semantics, reaching for custom semantics only where the design demands it, and testing with the same
-assistive technology real users rely on. Building inclusively is, in the end, simply building well.
+The practical lesson: build accessibility in from the first composable. Prefer Material components for
+their default semantics, add custom semantics only where the design forces it, and test with the
+assistive technology users actually run.
 
 \subsection*{Future work}
 
-The natural Version~2 is to run TalkBack on our own build across a device/version matrix, capture
-Layout Inspector evidence for representative findings, expand the Compose test suite and wire ATF
-into CI, and --- resources permitting --- invite users who rely on assistive technology to evaluate
-the core tasks.
+Version~2: run TalkBack on our own build across a device/version matrix, capture Layout Inspector
+evidence for representative findings, wire ATF into CI, and --- resources permitting --- have users
+who rely on assistive technology evaluate the core tasks.
 
 \section*{Appendix on AI usage}
 \addcontentsline{toc}{section}{Appendix on AI usage}
 
-AI assistants were used as a drafting and formatting aid: to help structure this report, generate the
-LaTeX scaffolding and diagrams, and produce the annotated UI mockups from our own designs and code.
-All accessibility techniques, the app architecture, the research decisions, and the case-study data
-originate from the group's own work; every AI-assisted passage was reviewed and edited by the members
-responsible for that section. Code samples in this report are excerpts from the app we wrote, not
-AI-generated boilerplate.
+AI assistants were used as a drafting and formatting aid: structuring the report, generating the
+LaTeX scaffolding and diagrams, and rendering the annotated UI mockups from our own designs and code.
+The accessibility techniques, app architecture, research decisions, and case-study data are the
+group's own work; every AI-assisted passage was reviewed and edited by the members responsible for
+that section. Code samples are excerpts from the app we wrote, not AI-generated boilerplate.

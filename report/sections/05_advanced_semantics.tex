@@ -1,10 +1,10 @@
 \section{Technical Approach II --- Advanced Semantics \& Navigation}
 \label{sec:adv}
 
-While core semantics make a single component correct, advanced semantics make a screen pleasant:
-they control how many focus stops there are, in what order they are read, and how deeply-nested
-actions are reached. These are the techniques that turn a technically-labelled UI into one that is
-actually comfortable to navigate with fixed action mechanisms e.g. keyboard movement, swipe-based movement.
+Core semantics make one component correct; advanced semantics make a whole screen efficient to
+navigate. They control how many focus stops exist, the order they are read in, and how nested actions
+are reached --- the difference between a technically-labelled UI and one that is fast to drive by
+swipe or switch.
 
 \subsection{Semantic merging: fewer, richer focus stops}
 
@@ -40,7 +40,7 @@ the next technique.
 
 \subsection{Clearing and hiding: \texttt{clearAndSetSemantics} \& \texttt{hideFromAccessibility}}
 
-There are two modifiers that let us prune the tree:
+Two modifiers prune the tree:
 
 \begin{itemize}[leftmargin=1.4em]
 	\item \code{clearAndSetSemantics \{\}} wipes a node's semantics (and its descendants') and lets us
