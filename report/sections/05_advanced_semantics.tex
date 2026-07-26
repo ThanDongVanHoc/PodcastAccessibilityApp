@@ -1,10 +1,10 @@
 \section{Technical Approach II --- Advanced Semantics \& Navigation}
 \label{sec:adv}
 
-Core semantics make a single component correct. Advanced semantics make a \emph{screen} pleasant:
+While core semantics make a single component correct, advanced semantics make a screen pleasant:
 they control how many focus stops there are, in what order they are read, and how deeply-nested
 actions are reached. These are the techniques that turn a technically-labelled UI into one that is
-actually comfortable to navigate by ear.
+actually comfortable to navigate with fixed action mechanisms e.g. keyboard movement, swipe-based movement.
 
 \subsection{Semantic merging: fewer, richer focus stops}
 
@@ -14,12 +14,12 @@ this is exhausting. \code{Modifier.semantics(mergeDescendants = true)} collapses
 children into one node whose announcement is the concatenation of its parts.
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{images/merge.png}
-\caption{The effect of \code{mergeDescendants = true} on a podcast card. Before (left): six separate
-focus stops, six swipes. After (right): one focus stop that TalkBack reads as a single sentence, with
-the nested bookmark/menu actions moved into the actions menu.}
-\label{fig:merge}
+	\centering
+	\includegraphics[width=\textwidth]{images/merge.png}
+	\caption{The effect of \code{mergeDescendants = true} on a podcast card. Before (left): six separate
+		focus stops, six swipes. After (right): one focus stop that TalkBack reads as a single sentence, with
+		the nested bookmark/menu actions moved into the actions menu.}
+	\label{fig:merge}
 \end{figure}
 
 \begin{lstlisting}[caption={\texttt{PodcastCard.kt} --- the card is one focus stop.},captionpos=b]
@@ -33,21 +33,21 @@ Card(
 ) { /* cover + title + author + metadata + nested icon buttons */ }
 \end{lstlisting}
 
-\textbf{Constraint.} A parent cannot merge a child that already merges itself --- interactive
-components (\code{Button}, \code{Switch}, anything with \code{clickable}/\code{toggleable}) resist
-merging so they remain independently operable. This is exactly why the nested bookmark button needs
+\textbf{Constraint.} A parent cannot merge a child that already merges itself. Interactive
+components (\code{Button}, \code{Switch}, anything with \code{clickable}/\code{toggleable} modifiers) resist
+merging so they remain independently operable. This is why the nested bookmark button needs
 the next technique.
 
 \subsection{Clearing and hiding: \texttt{clearAndSetSemantics} \& \texttt{hideFromAccessibility}}
 
-Two modifiers let us prune the tree:
+There are two modifiers that let us prune the tree:
 
 \begin{itemize}[leftmargin=1.4em]
-  \item \code{clearAndSetSemantics \{\}} wipes a node's semantics (and its descendants') and lets us
-        redefine them --- or leave them empty to remove the node from traversal entirely.
-  \item \code{hideFromAccessibility()} (Compose~1.8+) hides a node from assistive services while
-        keeping it for UI tests --- the correct modern replacement for setting
-        \code{contentDescription = null} on decorative elements.
+	\item \code{clearAndSetSemantics \{\}} wipes a node's semantics (and its descendants') and lets us
+	      redefine them  or leave them empty to remove the node from traversal entirely.
+	\item \code{hideFromAccessibility()} (Compose~1.8+) hides a node from assistive services while
+	      keeping it for UI tests. This is the modern alternative to setting
+	      \code{contentDescription} to \code{null} on decorative elements.
 \end{itemize}
 
 In \code{CoverArt.kt} the coloured cover tile is decorative when a text title sits beside it, so we
@@ -108,20 +108,20 @@ LazyColumn(modifier = Modifier.semantics { isTraversalGroup = true }) {
 Table~\ref{tab:matrix} summarises when to reach for each advanced modifier.
 
 \begin{table}[h]
-\centering
-\small
-\begin{tabularx}{\textwidth}{@{}l l Y@{}}
-\toprule
-\textbf{API} & \textbf{Applied to} & \textbf{Use case / effect} \\
-\midrule
-\code{mergeDescendants = true} & Container (Row/Column/Card) & Fuse fragmented text into one focus stop. \\
-\code{clearAndSetSemantics \{\}} & Custom or nested nodes & Erase raw semantics; redefine or remove from traversal. \\
-\code{hideFromAccessibility()} & Decorative elements & Hide from TalkBack, keep for UI tests. \\
-\code{isTraversalGroup = true} & Layout container & Force children to be read as a bounded block. \\
-\code{traversalIndex = Xf} & Child of a traversal group & Reorder reading (lowest value read first). \\
-\code{customActions = listOf(...)} & Parent list item / card & Move nested actions into the TalkBack menu. \\
-\bottomrule
-\end{tabularx}
-\caption{Choosing an advanced semantics API by structural need.}
-\label{tab:matrix}
+	\centering
+	\small
+	\begin{tabularx}{\textwidth}{@{}l l Y@{}}
+		\toprule
+		\textbf{API}                       & \textbf{Applied to}         & \textbf{Use case / effect}                              \\
+		\midrule
+		\code{mergeDescendants = true}     & Container (Row/Column/Card) & Fuse fragmented text into one focus stop.               \\
+		\code{clearAndSetSemantics \{\}}   & Custom or nested nodes      & Erase raw semantics; redefine or remove from traversal. \\
+		\code{hideFromAccessibility()}     & Decorative elements         & Hide from TalkBack, keep for UI tests.                  \\
+		\code{isTraversalGroup = true}     & Layout container            & Force children to be read as a bounded block.           \\
+		\code{traversalIndex = Xf}         & Child of a traversal group  & Reorder reading (lowest value read first).              \\
+		\code{customActions = listOf(...)} & Parent list item / card     & Move nested actions into the TalkBack menu.             \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Choosing an advanced semantics API by structural need.}
+	\label{tab:matrix}
 \end{table}

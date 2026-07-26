@@ -1,10 +1,10 @@
 # Fdb version 4
-["xdvipdfmx"] 1785043019.78967 "main.xdv" "main.pdf" "main" 1785043022.24952 0
-  "main.xdv" 1785043019.68979 521596 abf9171514f5ebba1977e265e279fdeb "xelatex"
+["xdvipdfmx"] 1785050640.96629 "main.xdv" "main.pdf" "main" 1785050643.29473 0
+  "main.xdv" 1785050640.871 522780 6f9ac8d88383f45c387a5c885a6a1fd9 "xelatex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["xelatex"] 1785043017.95672 "main.tex" "main.xdv" "main" 1785043022.24639 0
+["xelatex"] 1785050639.10022 "main.tex" "main.xdv" "main" 1785050643.29026 0
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1775415801 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1775415801 1528 f853c4d1b4e0550255e02831fdc8496f ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm" 1775415801 1528 abec98dbc43e172678c11b3b9031252a ""
@@ -151,16 +151,16 @@
   "images/merge.png" 1785040576.74397 116475 15c101e2a08570a57c05f5dbfa08c06a ""
   "images/player.png" 1785040576.7454 99248 867dc82415c7814d6f3252943d4e3d60 ""
   "images/scanner_agoda.png" 1785040576.74797 821537 2fd1942a6423cb6fa7abe9de96d8a617 ""
-  "main.aux" 1785043019.68779 13923 cf9986b4c82de99734aea5cef7c2e11a "xelatex"
-  "main.out" 1785043019.68979 7337 b2bbd514bededb808a838ce2476fd017 "xelatex"
+  "main.aux" 1785050640.869 13923 cf9986b4c82de99734aea5cef7c2e11a "xelatex"
+  "main.out" 1785050640.871 7337 b2bbd514bededb808a838ce2476fd017 "xelatex"
   "main.tex" 1785040679.51516 3689 48a63f131e8e41d0dfedd9c3bf88f1d0 ""
-  "main.toc" 1785043019.68979 3375 75aca91b7a93550ec8ba801a255a0c2e "xelatex"
+  "main.toc" 1785050640.871 3375 75aca91b7a93550ec8ba801a255a0c2e "xelatex"
   "sections/00_title.tex" 1785040576.75397 1048 ef4462a08bf184fae0eae5d522ef1ca9 ""
   "sections/01_introduction.tex" 1785041350.13456 3169 f01bdd47ce28be2bedfc1c36b497ca84 ""
   "sections/02_background.tex" 1785042892.14613 6474 96a8e7039b731868b472bd7ac5b56d2f ""
-  "sections/03_casestudy.tex" 1785043016.79077 5946 6f385907ddf7fe6d64d7cfd7423e712d ""
-  "sections/04_core_semantics.tex" 1785040576.75497 5840 78c813dd0b98b3c37f990422df4f5130 ""
-  "sections/05_advanced_semantics.tex" 1785040576.75497 6364 5c8f03b03b86b47415760c34abf937ae ""
+  "sections/03_casestudy.tex" 1785043048.11906 5946 6f385907ddf7fe6d64d7cfd7423e712d ""
+  "sections/04_core_semantics.tex" 1785050145.67541 5857 2d50941fc41f1a1fe1dae61547e38d28 ""
+  "sections/05_advanced_semantics.tex" 1785050637.33499 6650 34d0d765ee803bd7dac4fb1c68f30772 ""
   "sections/06_testing_evaluation.tex" 1785040576.75497 8095 8a24095b80d71ee4b42d2fa4150b2bdc ""
   "sections/07_conclusion.tex" 1785040576.75497 2493 65127c4fd1181f2ab4b41d691602f7c7 ""
   "sections/08_appendix.tex" 1785040576.75497 1630 c5364f543de0c37c94816289c470bf96 ""
